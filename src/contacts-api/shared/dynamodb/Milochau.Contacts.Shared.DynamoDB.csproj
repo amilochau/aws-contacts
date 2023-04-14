@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <IsPublishable>false</IsPublishable>
+    
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Nullable>enable</Nullable>
+
+    <IsTrimmable>true</IsTrimmable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Milochau.Core.Aws.Abstractions" Version="0.1.2-beta.14" />
+    <PackageReference Include="Milochau.Core.Aws.DynamoDB" Version="0.1.2-beta.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\entities\Milochau.Contacts.Shared.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

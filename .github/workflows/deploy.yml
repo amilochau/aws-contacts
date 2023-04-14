@@ -1,0 +1,131 @@
+name: Deploy
+run-name: Deploy - ${{ github.ref }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+
+concurrency: deploy
+
+env:
+  INFRA_WORKSPACE_DEV: dev
+  INFRA_WORKSPACE_PRD: prd
+  INFRA_AWS_ROLE: arn:aws:iam::266302224431:role/github-shd-role
+  INFRA_AWS_REGION: eu-west-3
+  PROJECT_API_SOLUTION: './src/contacts-api/Milochau.Contacts.Functions.sln'
+  PROJECT_API_PUBLISH_FILTER: '*/bin/Release/net7.0/linux-x64/publish/bootstrap'
+  PROJECT_CLIENT_WORKSPACE: './src/contacts-client'
+
+jobs:
+  build_iac:
+    name: Build (IaC)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and test projects
+        uses: amilochau/github-actions/build/terraform@v3
+
+  build_api:
+    name: Build (API)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build AWS Lambda functions
+        uses: amilochau/github-actions/build/lambda-functions@v3
+        with:
+          solutionPath: ${{ env.PROJECT_API_SOLUTION }}
+          publishPathFilter: ${{ env.PROJECT_API_PUBLISH_FILTER }}
+
+  build_client:
+    name: Build (Client)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: "${{ env.PROJECT_CLIENT_WORKSPACE }}/package-lock.json"
+      - name: Install packages
+        shell: pwsh
+        run: npm ci
+        working-directory: ${{ env.PROJECT_CLIENT_WORKSPACE }}
+      - name: Build application
+        shell: pwsh
+        run: npm run build
+        working-directory: ${{ env.PROJECT_CLIENT_WORKSPACE }}
+      - name: Upload artifact (compressed)
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-node-compressed
+          path: ${{ env.PROJECT_CLIENT_WORKSPACE }}/dist
+          if-no-files-found: error
+          retention-days: 1
+
+  deploy_dev:
+    name: Deploy (DEV)
+    needs: [build_iac, build_api, build_client]
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    environment: DEV
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download artifact (API)
+        uses: actions/download-artifact@v3
+        with:
+          name: build-lambda-functions-compressed
+      - name: Download artifact (Client)
+        uses: actions/download-artifact@v3
+        with:
+          name: build-node-compressed
+          path: ${{ env.PROJECT_CLIENT_WORKSPACE }}/dist
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          role-to-assume: ${{ env.INFRA_AWS_ROLE }}
+          aws-region: ${{ env.INFRA_AWS_REGION }}
+
+      - name: Deploy Terraform module
+        uses: amilochau/github-actions/deploy/terraform@v3
+        with:
+          workspaceName: ${{ env.INFRA_WORKSPACE_DEV }}
+
+  deploy_prd:
+    name: Deploy (PRD)
+    if: github.ref == 'refs/heads/main'
+    needs: [deploy_dev]
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    environment: PRD
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download artifact (API)
+        uses: actions/download-artifact@v3
+        with:
+          name: build-lambda-functions-compressed
+      - name: Download artifact (Client)
+        uses: actions/download-artifact@v3
+        with:
+          name: build-node-compressed
+          path: ${{ env.PROJECT_CLIENT_WORKSPACE }}/dist
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          role-to-assume: ${{ env.INFRA_AWS_ROLE }}
+          aws-region: ${{ env.INFRA_AWS_REGION }}
+
+      - name: Deploy Terraform module
+        uses: amilochau/github-actions/deploy/terraform@v3
+        with:
+          workspaceName: ${{ env.INFRA_WORKSPACE_PRD }}
