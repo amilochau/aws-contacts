@@ -13,7 +13,7 @@ using Milochau.Core.Aws.Abstractions;
 using System.Globalization;
 using Milochau.Contacts.Shared.Entities.Types;
 
-namespace Milochau.Contacts.Http.Items.Post.DataAccess
+namespace Milochau.Contacts.Http.Messages.Post.DataAccess
 {
     public interface IDynamoDbDataAccess
     {

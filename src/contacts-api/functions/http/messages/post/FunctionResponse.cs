@@ -1,7 +1,7 @@
 ﻿using Milochau.Contacts.Shared.Entities.ValueTypes;
 using System.Collections.Generic;
 
-namespace Milochau.Contacts.Http.Items.Post
+namespace Milochau.Contacts.Http.Messages.Post
 {
     public class FunctionResponse
     {

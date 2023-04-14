@@ -15,10 +15,10 @@ lambda_settings = {
     "http/messages/post" = {
       memory_size_mb = 256
       http_triggers = [{
-        method = "POST"
-        route  = "/api/messages"
+        method    = "POST"
+        route     = "/api/messages"
         anonymous = false
-      }, {
+        }, {
         method    = "POST"
         route     = "/api/a/messages"
         anonymous = true

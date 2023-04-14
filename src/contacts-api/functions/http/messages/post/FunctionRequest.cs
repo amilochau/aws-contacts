@@ -9,7 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Milochau.Contacts.Http.Items.Post
+namespace Milochau.Contacts.Http.Messages.Post
 {
     public class FunctionRequest : MaybeAuthenticatedRequest, IParsableAndValidatable<FunctionRequest>
     {

@@ -16,4 +16,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\functions\http\messages\post\Milochau.Contacts.Http.Messages.Post.csproj" />
+  </ItemGroup>
+
 </Project>

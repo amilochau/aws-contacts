@@ -4,7 +4,7 @@ using Amazon.Lambda.Core;
 using Amazon.Lambda.RuntimeSupport;
 using Amazon.Lambda.Serialization.SystemTextJson;
 using Milochau.Core.Aws.ApiGateway;
-using Milochau.Contacts.Http.Items.Post.DataAccess;
+using Milochau.Contacts.Http.Messages.Post.DataAccess;
 using Milochau.Contacts.Shared.Entities.Types;
 using System;
 using System.Text.Json.Serialization;
@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 [assembly: LambdaSerializer(typeof(DefaultLambdaJsonSerializer))]
-namespace Milochau.Contacts.Http.Items.Post
+namespace Milochau.Contacts.Http.Messages.Post
 {
     public class Function
     {
