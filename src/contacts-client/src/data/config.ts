@@ -22,12 +22,12 @@ export const envConfig: EnvConfigValues = {
   local: {
     VITE_API_URL: "http://localhost:4000",
     VITE_COGNITO_USERPOOL_ID: "eu-west-3_91PfBkcmP",
-    VITE_COGNITO_CLIENT_ID: '@todo',
+    VITE_COGNITO_CLIENT_ID: '1kva4eremslnm1pje1alqulgpc',
   },
   dev: {
-    VITE_API_URL: "https://@todo.cloudfront.net/api", // @todo to adapt when domain is supported
+    VITE_API_URL: "https://d17tqbkux2vtro.cloudfront.net/api", // @todo to adapt when domain is supported
     VITE_COGNITO_USERPOOL_ID: "eu-west-3_91PfBkcmP",
-    VITE_COGNITO_CLIENT_ID: '@todo',
+    VITE_COGNITO_CLIENT_ID: '1kva4eremslnm1pje1alqulgpc',
   },
   prd: {
     VITE_API_URL: "https://@todo.cloudfront.net/api", // @todo to adapt when domain is supported
@@ -39,7 +39,7 @@ export const envConfig: EnvConfigValues = {
 export const getCurrentEnv = (host: string, subdomain: string): Environment => {
   if (host.includes('localhost')) {
     return Environment.Local
-  } else if (subdomain.includes('dev') || subdomain.includes('@todo')) { // @todo to remove when domain is supported
+  } else if (subdomain.includes('dev') || subdomain.includes('d17tqbkux2vtro')) { // @todo to remove when domain is supported
     return Environment.Development
   } else {
     return Environment.Production

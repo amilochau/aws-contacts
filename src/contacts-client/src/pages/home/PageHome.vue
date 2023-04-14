@@ -88,7 +88,7 @@
 
 <script setup lang="ts">
 import { mdiSend } from '@mdi/js'
-import { useMessagesApi } from '@/composition/api';
+import { useMessagesAnonymousApi, useMessagesApi } from '@/composition/api';
 import { MessagesCreateRequest } from '@/types/messages';
 import { useAppStore, useHandle, useIdentityStore, usePage, useValidationRules } from '@amilochau/core-vue3';
 import { useOnline } from '@vueuse/core';
@@ -107,6 +107,7 @@ const { attributes, isAuthenticated } = storeToRefs(identityStore);
 const { handleFormValidation } = useHandle()
 const appStore = useAppStore()
 const messagesApi = useMessagesApi()
+const messagesAnonymousApi = useMessagesAnonymousApi()
 const online = useOnline()
 const { loading } = storeToRefs(appStore)
 const { required, maxLength, emailAddress } = useValidationRules()
@@ -117,12 +118,13 @@ const request: Ref<MessagesCreateRequest> = ref(new MessagesCreateRequest())
 
 const initRequest = () => {
   request.value = new MessagesCreateRequest()
-  if (isAuthenticated) {
+  if (isAuthenticated.value) {
     request.value.content.senderEmail = attributes.value.email
     request.value.content.senderName = attributes.value.name
   }
 }
 
+initRequest();
 watch(isAuthenticated, initRequest)
 
 async function send() {
@@ -132,10 +134,17 @@ async function send() {
 
   request.value.content.culture = route.params.lang.toString()
 
-  const response = await messagesApi.create(request.value)
+  let messageId = '';
+  if (isAuthenticated.value) {
+    const response = await messagesApi.create(request.value)
+    messageId = response.id;
+  } else {
+    const response = await messagesAnonymousApi.create(request.value)
+    messageId = response.id;
+  }
   appStore.displaySuccessMessage(t('successfullySended'), undefined, 'snackbar')
   initRequest()
-  router.push({ name: 'Message', params: { id: response.id } })
+  router.push({ name: 'Message', params: { id: messageId } })
 }
 </script>
 

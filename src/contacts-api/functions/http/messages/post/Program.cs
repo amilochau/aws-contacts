@@ -49,6 +49,12 @@ namespace Milochau.Contacts.Http.Messages.Post
                 return proxyResponse;
             }
 
+            if (requestData.User != null)
+            {
+                requestData.Content.SenderEmail = requestData.User.Email;
+                requestData.Content.SenderName = requestData.User.Name;
+            }
+
             var response = await dynamoDbDataAccess.CreateMessageAsync(requestData, cancellationToken);
 
             return HttpResponse.Ok(response, ApplicationJsonSerializerContext.Default.FunctionResponse);
