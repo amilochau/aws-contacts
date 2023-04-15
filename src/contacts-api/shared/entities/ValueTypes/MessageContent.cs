@@ -1,6 +1,5 @@
 ﻿using Amazon.DynamoDBv2.Model;
 using Milochau.Core.Aws.DynamoDB;
-using Milochau.Contacts.Shared.Entities.Types;
 using System.Collections.Generic;
 using System.Linq;
 

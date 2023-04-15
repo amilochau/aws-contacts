@@ -1,13 +1,10 @@
 using Amazon.Lambda.APIGatewayEvents;
 using Milochau.Core.Aws.ApiGateway;
-using Milochau.Contacts.Shared.Entities.Types;
 using Milochau.Contacts.Shared.Entities.ValueTypes;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Milochau.Contacts.Http.Messages.Post
 {

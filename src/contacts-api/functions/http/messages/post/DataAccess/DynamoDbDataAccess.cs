@@ -6,11 +6,7 @@ using Milochau.Contacts.Shared.DynamoDB;
 using Amazon.DynamoDBv2.Model;
 using Milochau.Contacts.Shared.Entities;
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using Milochau.Core.Aws.DynamoDB;
-using Milochau.Core.Aws.Abstractions;
-using System.Globalization;
 using Milochau.Contacts.Shared.Entities.Types;
 
 namespace Milochau.Contacts.Http.Messages.Post.DataAccess

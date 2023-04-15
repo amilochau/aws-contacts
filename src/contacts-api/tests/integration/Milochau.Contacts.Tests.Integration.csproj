@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\functions\http\messages\get\Milochau.Contacts.Http.Messages.Get.csproj" />
     <ProjectReference Include="..\..\functions\http\messages\post\Milochau.Contacts.Http.Messages.Post.csproj" />
   </ItemGroup>
 

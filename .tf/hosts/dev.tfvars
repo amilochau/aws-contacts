@@ -24,6 +24,18 @@ lambda_settings = {
         anonymous = true
       }]
     }
+    "http/messages/get" = {
+      memory_size_mb = 256
+      http_triggers = [{
+        method    = "GET"
+        route     = "/api/messages/{messageId}"
+        anonymous = false
+        }, {
+        method    = "GET"
+        route     = "/api/a/messages/{messageId}"
+        anonymous = true
+      }]
+    }
   }
 }
 

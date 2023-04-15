@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Milochau.Contacts.Shared.En
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Milochau.Contacts.Http.Messages.Post", "functions\http\messages\post\Milochau.Contacts.Http.Messages.Post.csproj", "{C2D4310A-F3D5-4142-B6D5-7F972D9900B5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Milochau.Contacts.Http.Messages.Get", "functions\http\messages\get\Milochau.Contacts.Http.Messages.Get.csproj", "{9C583606-FAF7-4109-889A-B95AAC37298F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{C2D4310A-F3D5-4142-B6D5-7F972D9900B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2D4310A-F3D5-4142-B6D5-7F972D9900B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2D4310A-F3D5-4142-B6D5-7F972D9900B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C583606-FAF7-4109-889A-B95AAC37298F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C583606-FAF7-4109-889A-B95AAC37298F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C583606-FAF7-4109-889A-B95AAC37298F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C583606-FAF7-4109-889A-B95AAC37298F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{64A9C17C-AECC-4F34-B219-227AE44133A3} = {1AC46DFE-0602-4EFC-B6C6-290FA6FDEAB6}
 		{3099FBE7-87EE-46FA-A67F-505ED731089F} = {1AC46DFE-0602-4EFC-B6C6-290FA6FDEAB6}
 		{C2D4310A-F3D5-4142-B6D5-7F972D9900B5} = {CCFAF657-334F-4A8B-8BD4-98DEE57331C1}
+		{9C583606-FAF7-4109-889A-B95AAC37298F} = {CCFAF657-334F-4A8B-8BD4-98DEE57331C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C48C3CE6-9541-4497-B2EE-589791207E39}
