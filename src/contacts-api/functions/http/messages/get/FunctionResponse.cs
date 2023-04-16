@@ -16,7 +16,7 @@ namespace Milochau.Contacts.Http.Messages.Get
         public MessageStatus Status { get; set; }
 
         public MessageContent Content { get; set; } = null!;
-        public IList<MessageTracking> Tracking { get; set; } = null!;
+        public IList<MessageTracking> Trackings { get; set; } = null!;
 
     }
 }

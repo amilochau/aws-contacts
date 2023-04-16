@@ -53,7 +53,7 @@ namespace Milochau.Contacts.Http.Messages.Get
             if (requestData.User == null || requestData.User.Id != response.UserId)
             {
                 // Anonymous & other users can't see personal data
-                response.Tracking.Clear();
+                response.Trackings.Clear();
                 response.Content.SenderEmail = string.Empty;
                 response.Content.SenderName = string.Empty;
             }

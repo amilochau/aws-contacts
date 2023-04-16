@@ -104,7 +104,7 @@ const route = useRoute()
 const router = useRouter()
 const identityStore = useIdentityStore()
 const { attributes, isAuthenticated } = storeToRefs(identityStore);
-const { handleFormValidation } = useHandle()
+const { handleFormValidation, handleLoadAndError } = useHandle()
 const appStore = useAppStore()
 const messagesApi = useMessagesApi()
 const messagesAnonymousApi = useMessagesAnonymousApi()
@@ -135,16 +135,18 @@ async function send() {
   request.value.content.culture = route.params.lang.toString()
 
   let messageId = '';
-  if (isAuthenticated.value) {
-    const response = await messagesApi.create(request.value)
-    messageId = response.id;
-  } else {
-    const response = await messagesAnonymousApi.create(request.value)
-    messageId = response.id;
-  }
-  appStore.displaySuccessMessage(t('successfullySended'), undefined, 'snackbar')
-  initRequest()
-  router.push({ name: 'Message', params: { id: messageId } })
+  return handleLoadAndError(async () => {
+    if (isAuthenticated.value) {
+      const response = await messagesApi.create(request.value)
+      messageId = response.id;
+    } else {
+      const response = await messagesAnonymousApi.create(request.value)
+      messageId = response.id;
+    }
+    appStore.displaySuccessMessage(t('successfullySended'), undefined, 'snackbar')
+    initRequest()
+    router.push({ name: 'Message', params: { id: messageId } })
+  }, 'snackbar')
 }
 </script>
 

@@ -40,7 +40,7 @@ namespace Milochau.Contacts.Http.Messages.Get.DataAccess
                 UserId = message.UserId,
                 Status = message.Status,
                 Content = message.Content,
-                Tracking = message.Tracking,
+                Trackings = message.Tracking,
             };
         }
     }
