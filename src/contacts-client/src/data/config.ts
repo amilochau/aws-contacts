@@ -22,12 +22,12 @@ export const envConfig: EnvConfigValues = {
   local: {
     VITE_API_URL: "http://localhost:4000",
     VITE_COGNITO_USERPOOL_ID: "eu-west-3_91PfBkcmP",
-    VITE_COGNITO_CLIENT_ID: '4orj13nuej5ob6ti28eq8fal0h',
+    VITE_COGNITO_CLIENT_ID: '63891k3n9159vur4sfsn2ntnk0',
   },
   dev: {
     VITE_API_URL: "https://d17tqbkux2vtro.cloudfront.net/api", // @todo to adapt when domain is supported
     VITE_COGNITO_USERPOOL_ID: "eu-west-3_91PfBkcmP",
-    VITE_COGNITO_CLIENT_ID: '4orj13nuej5ob6ti28eq8fal0h',
+    VITE_COGNITO_CLIENT_ID: '63891k3n9159vur4sfsn2ntnk0',
   },
   prd: {
     VITE_API_URL: "https://d3435xftqcgrpg.cloudfront.net/api", // @todo to adapt when domain is supported
