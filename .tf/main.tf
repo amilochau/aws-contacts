@@ -29,12 +29,12 @@ provider "aws" {
 }
 
 module "checks" {
-  source      = "git::https://github.com/amilochau/tf-modules.git//shared/checks?ref=main"
+  source      = "git::https://github.com/amilochau/tf-modules.git//shared/checks?ref=v1"
   conventions = var.conventions
 }
 
 module "functions_app" {
-  source      = "git::https://github.com/amilochau/tf-modules.git//aws/functions-app?ref=main"
+  source      = "git::https://github.com/amilochau/tf-modules.git//aws/functions-app?ref=v1"
   conventions = var.conventions
 
   cognito_clients_settings = var.cognito_clients_settings
@@ -59,7 +59,7 @@ module "functions_app" {
 }
 
 module "client_app" {
-  source      = "git::https://github.com/amilochau/tf-modules.git//aws/static-web-app?ref=main"
+  source      = "git::https://github.com/amilochau/tf-modules.git//aws/static-web-app?ref=v1"
   conventions = var.conventions
 
   api_settings = {
