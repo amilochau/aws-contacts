@@ -71,7 +71,7 @@ variable "dynamodb_tables_settings" {
 variable "client_settings" {
   description = "Client application settings"
   type = object({
-    package_source_file = string
+    package_source_file   = string
     s3_bucket_name_suffix = string
     domains = optional(object({
       zone_name                 = string
