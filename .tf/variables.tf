@@ -72,7 +72,7 @@ variable "client_settings" {
   description = "Client application settings"
   type = object({
     package_source_file   = string
-    s3_bucket_name_suffix = string
+    s3_bucket_name_suffix = optional(string, "")
     domains = optional(object({
       zone_name                 = string
       domain_name               = string
