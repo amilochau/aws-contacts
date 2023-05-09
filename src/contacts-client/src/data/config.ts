@@ -25,12 +25,12 @@ export const envConfig: EnvConfigValues = {
     VITE_COGNITO_CLIENT_ID: '63891k3n9159vur4sfsn2ntnk0',
   },
   dev: {
-    VITE_API_URL: "https://d17tqbkux2vtro.cloudfront.net/api", // @todo to adapt when domain is supported
+    VITE_API_URL: "https://dev.contact.milochau.com/api",
     VITE_COGNITO_USERPOOL_ID: "eu-west-3_91PfBkcmP",
     VITE_COGNITO_CLIENT_ID: '63891k3n9159vur4sfsn2ntnk0',
   },
   prd: {
-    VITE_API_URL: "https://d3435xftqcgrpg.cloudfront.net/api", // @todo to adapt when domain is supported
+    VITE_API_URL: "https://contact.milochau.com/api",
     VITE_COGNITO_USERPOOL_ID: "eu-west-3_yAqixEcS4",
     VITE_COGNITO_CLIENT_ID: '61tdr81eljvd2k8ornt4rnuep7',
   }
@@ -39,7 +39,7 @@ export const envConfig: EnvConfigValues = {
 export const getCurrentEnv = (host: string, subdomain: string): Environment => {
   if (host.includes('localhost')) {
     return Environment.Local
-  } else if (subdomain.includes('dev') || subdomain.includes('d17tqbkux2vtro')) { // @todo to remove when domain is supported
+  } else if (subdomain.includes('dev')) {
     return Environment.Development
   } else {
     return Environment.Production

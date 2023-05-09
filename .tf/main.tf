@@ -28,6 +28,18 @@ provider "aws" {
   }
 }
 
+provider "aws" {
+  alias  = "us-east-1"
+  region = "us-east-1"
+
+  default_tags {
+    tags = {
+      application = var.conventions.application_name
+      host        = var.conventions.host_name
+    }
+  }
+}
+
 module "checks" {
   source      = "git::https://github.com/amilochau/tf-modules.git//shared/checks?ref=v1"
   conventions = var.conventions
@@ -68,5 +80,9 @@ module "client_app" {
   }
   client_settings = {
     package_source_file = var.client_settings.package_source_file
+  }
+
+  providers = {
+    aws.us-east-1 = aws.us-east-1
   }
 }

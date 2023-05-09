@@ -50,4 +50,8 @@ dynamodb_tables_settings = {
 
 client_settings = {
   package_source_file = "../src/contacts-client/dist"
+  domains = {
+    zone_name   = "milochau.com"
+    domain_name = "contact.milochau.com"
+  }
 }
