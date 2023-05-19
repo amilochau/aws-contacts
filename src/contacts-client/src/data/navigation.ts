@@ -1,27 +1,30 @@
-import { mdiGavel, mdiHome } from '@mdi/js'
+import { mdiGavel, mdiHome, mdiCardAccountMail } from '@mdi/js'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
 
 export default computed(() => {
 
   const { t, mergeLocaleMessage } = useI18n()
+  const route = useRoute()
 
   mergeLocaleMessage('en', {
-    navigation: {
-      home: "Home",
-      privacy: "Privacy",
-    }
+    home: "Home",
+    privacy: "Privacy",
+    contact: 'Contact',
   })
   mergeLocaleMessage('fr', {
-    navigation: {
-      home: "Accueil",
-      privacy: "Confidentialité",
-    }
+    home: "Accueil",
+    privacy: "Confidentialité",
+    contact: 'Contact',
   })
 
+  const contactUrl = computed(() => `https://contact.milochau.com/${route.params.lang}?returnUrl=${window.location.href}`)
+
   return [
-    { title: t('navigation.home'), prependIcon: mdiHome, to: { name: 'Home' }, exact: true },
+    { title: t('home'), prependIcon: mdiHome, to: { name: 'Home' }, exact: true },
     { type: 'divider' },
-    { title: t('navigation.privacy'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
+    { title: t('privacy'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
+    { title: t('contact'), prependIcon: mdiCardAccountMail, href: contactUrl.value, target: "_blank", rel: "noopener" },
   ]
 })
