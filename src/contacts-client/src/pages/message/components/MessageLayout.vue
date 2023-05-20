@@ -35,7 +35,9 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row v-if="hasReturnUrl">
+    <v-row
+      v-if="hasReturnUrl"
+      justify="center">
       <v-col
         cols="12"
         lg="8"
@@ -80,7 +82,7 @@ const appStore = useAppStore()
 const messagesApi = useMessagesApi()
 const messagesAnonymousApi = useMessagesAnonymousApi()
 const { loading } = storeToRefs(appStore)
-const { hasReturnUrl, goToReturnUrl } = useUrl()
+const { hasReturnUrl, returnUrl } = useUrl()
 const { handleLoadAndError } = useHandle()
 const { formatMessageStatus } = useFormat()
 
