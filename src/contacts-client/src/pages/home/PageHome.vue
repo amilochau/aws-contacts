@@ -98,6 +98,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router';
+import { useUrl } from '@/composition/url';
 
 usePage()
 const route = useRoute()
@@ -111,6 +112,7 @@ const messagesAnonymousApi = useMessagesAnonymousApi()
 const online = useOnline()
 const { loading } = storeToRefs(appStore)
 const { required, maxLength, emailAddress } = useValidationRules()
+const { encodedReturnUrl } = useUrl()
 const { t } = useI18n()
 
 const form: Ref<any> = ref(null)
@@ -144,7 +146,7 @@ async function send() {
       messageId = response.id;
     }
     appStore.displaySuccessMessage(t('successfullySended'), undefined, 'snackbar')
-    router.push({ name: 'Message', params: { id: messageId }, query: { returnUrl: route.query.returnUrl } })
+    router.push({ name: 'Message', params: { id: messageId }, query: { returnUrl: encodedReturnUrl.value } })
   }, 'snackbar')
 }
 </script>

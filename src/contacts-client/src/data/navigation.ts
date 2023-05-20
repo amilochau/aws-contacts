@@ -19,7 +19,7 @@ export default computed(() => {
     contact: 'Contact',
   })
 
-  const contactUrl = computed(() => `https://contact.milochau.com/${route.params.lang}?returnUrl=${window.location.href}`)
+  const contactUrl = computed(() => `https://contact.milochau.com/${route.params.lang}?returnUrl=${encodeURIComponent(window.location.href)}`)
 
   return [
     { title: t('home'), prependIcon: mdiHome, to: { name: 'Home' }, exact: true },
