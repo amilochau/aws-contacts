@@ -11,18 +11,26 @@ export function useUrl() {
       return undefined
     }
     try {
-      return new URL(route.query.returnUrl?.toString())
+      return new URL(decodeURIComponent(route.query.returnUrl?.toString()))
     } catch (error) {
       return undefined
     }
   })
 
-  const hasReturnUrl = computed(() => {
+  const encodedReturnUrl = computed(() => {
+    if (!returnUrl.value) {
+      return undefined
+    }
+
+    return encodeURIComponent(returnUrl.value.toString())
+  })
+
+  const hasValidReturnUrl = computed(() => {
     if (!returnUrl.value) {
       return false
     }
 
-    const hostSegments = getDomainFromHost(returnUrl.value.host)
+    const hostSegments = getDomainFromHost(returnUrl.value.hostname)
     if (!hostSegments) {
       return false
     }
@@ -35,13 +43,14 @@ export function useUrl() {
     if (hostSegments.length >= 2) {
       return `${hostSegments.at(-2)}.${hostSegments.at(-1)}`
     } else {
-      return undefined
+      return hostSegments[0]
     }
   }
 
   return {
     returnUrl,
-    hasReturnUrl,
+    encodedReturnUrl,
+    hasValidReturnUrl,
     getDomainFromHost,
   }
 }
