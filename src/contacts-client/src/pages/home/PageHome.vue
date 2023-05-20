@@ -144,8 +144,7 @@ async function send() {
       messageId = response.id;
     }
     appStore.displaySuccessMessage(t('successfullySended'), undefined, 'snackbar')
-    initRequest()
-    router.push({ name: 'Message', params: { id: messageId } })
+    router.push({ name: 'Message', params: { id: messageId }, query: { returnUrl: route.query.returnUrl } })
   }, 'snackbar')
 }
 </script>

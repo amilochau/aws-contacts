@@ -39,16 +39,9 @@ export function useUrl() {
     }
   }
 
-  const goToReturnUrl = () => {
-    if (returnUrl.value) {
-      window.location.href = returnUrl.value.toString()
-    }
-  }
-
   return {
     returnUrl,
     hasReturnUrl,
     getDomainFromHost,
-    goToReturnUrl,
   }
 }
