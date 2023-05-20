@@ -43,10 +43,12 @@
         <v-btn
           :disabled="loading || !online"
           :prepend-icon="mdiArrowULeftBottom"
+          :href="returnUrl?.toString()"
+          target="_blank"
+          rel="noopener"
           class="my-3"
           color="primary"
-          variant="text"
-          @click="goToReturnUrl">
+          variant="text">
           {{ t("backToReturnUrl") }}
         </v-btn>
       </v-col>
