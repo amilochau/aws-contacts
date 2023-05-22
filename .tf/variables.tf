@@ -27,7 +27,7 @@ variable "lambda_settings" {
   type = object({
     base_directory = string
     functions = map(object({
-      memory_size_mb        = optional(number, 128)
+      memory_size_mb        = optional(number, 512)
       timeout_s             = optional(number, 10)
       package_file          = optional(string, "bin/Release/net7.0/linux-x64/publish/bootstrap.zip")
       handler               = optional(string, "bootstrap")
