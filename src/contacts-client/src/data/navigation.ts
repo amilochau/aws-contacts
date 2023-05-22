@@ -1,4 +1,4 @@
-import { mdiGavel, mdiHome, mdiCardAccountMail } from '@mdi/js'
+import { mdiGavel, mdiHome, mdiCardAccountMail, mdiOpenInNew } from '@mdi/js'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
@@ -25,6 +25,6 @@ export default computed(() => {
     { title: t('home'), prependIcon: mdiHome, to: { name: 'Home' }, exact: true },
     { type: 'divider' },
     { title: t('privacy'), prependIcon: mdiGavel, to: { name: 'Privacy' } },
-    { title: t('contact'), prependIcon: mdiCardAccountMail, href: contactUrl.value, target: "_blank", rel: "noopener" },
+    { title: t('contact'), prependIcon: mdiCardAccountMail, appendIcon: mdiOpenInNew, href: contactUrl.value, target: "_blank", rel: "noopener" },
   ]
 })
