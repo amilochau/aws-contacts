@@ -13,7 +13,6 @@ lambda_settings = {
   base_directory = "../src/contacts-api/functions"
   functions = {
     "http/messages/post" = {
-      memory_size_mb = 256
       http_triggers = [{
         method    = "POST"
         route     = "/api/messages"
@@ -25,7 +24,6 @@ lambda_settings = {
       }]
     }
     "http/messages/get" = {
-      memory_size_mb = 256
       http_triggers = [{
         method    = "GET"
         route     = "/api/messages/{messageId}"
