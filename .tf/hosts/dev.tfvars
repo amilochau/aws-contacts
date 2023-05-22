@@ -34,6 +34,12 @@ lambda_settings = {
         anonymous = true
       }]
     }
+    "scheduler/summary" = {
+      scheduler_triggers = [{
+        description         = "Send a summary of pending contacts every day"
+        schedule_expression = "rate(2 minutes)"
+      }]
+    }
   }
 }
 
@@ -42,6 +48,22 @@ dynamodb_tables_settings = {
     partition_key = "id"
     ttl = {
       enabled = true
+    }
+    attributes = {
+      "st" = {
+        type = "N"
+      }
+    }
+    global_secondary_indexes = {
+      "by_st_thenby_id" = {
+        partition_key = "st"
+        sort_key      = "id"
+        non_key_attributes = [
+          "cd",
+          "user_id",
+          "co"
+        ]
+      }
     }
   }
 }
