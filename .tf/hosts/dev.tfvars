@@ -66,6 +66,9 @@ dynamodb_tables_settings = {
       }
     }
   }
+  "admins" = {
+    partition_key = "id"
+  }
 }
 
 client_settings = {
