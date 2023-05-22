@@ -16,7 +16,7 @@ namespace Milochau.Contacts.Scheuler.Summary
         private static async Task Main()
         {
             Func<string, ILambdaContext, Task> handler = FunctionHandler;
-            await LambdaBootstrapBuilder.Create(handler, new SourceGeneratorLambdaJsonSerializer<ApplicationJsonSerializerContext>())
+            await LambdaBootstrapBuilder.Create(handler, new DefaultLambdaJsonSerializer())
                 .Build()
                 .RunAsync();
         }
@@ -45,11 +45,5 @@ namespace Milochau.Contacts.Scheuler.Summary
 
             await dynamoDbDataAccess.SendSummaryAsync(cancellationToken);
         }
-    }
-
-    [JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull)]
-    [JsonSerializable(typeof(string))]
-    public partial class ApplicationJsonSerializerContext : JsonSerializerContext
-    {
     }
 }
