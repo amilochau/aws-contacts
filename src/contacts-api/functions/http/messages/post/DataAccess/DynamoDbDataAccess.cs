@@ -16,7 +16,7 @@ namespace Milochau.Contacts.Http.Messages.Post.DataAccess
         Task<FunctionResponse> CreateMessageAsync(FunctionRequest request, CancellationToken cancellationToken);
     }
 
-    public class DynamoDbDataAccess : BaseDynamoDbDataAccess<BaseAccessResult>, IDynamoDbDataAccess
+    public class DynamoDbDataAccess : BaseDynamoDbDataAccess, IDynamoDbDataAccess
     {
         public DynamoDbDataAccess(IAmazonDynamoDB amazonDynamoDB) : base(amazonDynamoDB)
         {
