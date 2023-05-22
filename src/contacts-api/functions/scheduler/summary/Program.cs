@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text.Json.Serialization;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
@@ -15,13 +15,13 @@ namespace Milochau.Contacts.Scheuler.Summary
     {
         private static async Task Main()
         {
-            Func<string, ILambdaContext, Task> handler = FunctionHandler;
-            await LambdaBootstrapBuilder.Create(handler, new DefaultLambdaJsonSerializer())
+            Func<Stream, ILambdaContext, Task> handler = FunctionHandler;
+            await LambdaBootstrapBuilder.Create(handler)
                 .Build()
                 .RunAsync();
         }
 
-        public static async Task FunctionHandler(string request, ILambdaContext context)
+        public static async Task FunctionHandler(Stream request, ILambdaContext context)
         {
             try
             {
@@ -39,9 +39,11 @@ namespace Milochau.Contacts.Scheuler.Summary
             }
         }
 
-        public static async Task DoAsync(string request, ILambdaContext context, IDynamoDbDataAccess dynamoDbDataAccess, CancellationToken cancellationToken)
+        public static async Task DoAsync(Stream request, ILambdaContext context, IDynamoDbDataAccess dynamoDbDataAccess, CancellationToken cancellationToken)
         {
-            context.Logger.LogInformation(request);
+            using var streamReader = new StreamReader(request);
+            var content = await streamReader.ReadToEndAsync(cancellationToken);
+            context.Logger.LogInformation(content);
 
             await dynamoDbDataAccess.SendSummaryAsync(cancellationToken);
         }
