@@ -40,7 +40,7 @@
 
   <ItemGroup>
     <TrimmerRootAssembly Include="AWSSDK.Core" />
-    <RdXmlFile Include="../../../rd.xml" />
+    <RdXmlFile Include="../../rd.xml" />
   </ItemGroup>
 
 </Project>
