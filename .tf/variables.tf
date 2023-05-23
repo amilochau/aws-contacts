@@ -33,17 +33,25 @@ variable "lambda_settings" {
       handler               = optional(string, "bootstrap")
       environment_variables = optional(map(string), {})
       http_triggers = optional(list(object({
+        description = optional(string, null)
         method      = string
         route       = string
         anonymous   = optional(bool, false)
         enable_cors = optional(bool, false)
       })), [])
       sns_triggers = optional(list(object({
-        topic_name = string
+        description = optional(string, null)
+        topic_name  = string
       })), [])
       scheduler_triggers = optional(list(object({
         description         = optional(string, null)
         schedule_expression = string
+      })), [])
+      ses_accesses = optional(list(object({
+        domain = string
+      })), [])
+      lambda_accesses = optional(list(object({
+        arn = string
       })), [])
     }))
   })

@@ -64,6 +64,8 @@ module "functions_app" {
         http_triggers         = v.http_triggers
         sns_triggers          = v.sns_triggers
         scheduler_triggers    = v.scheduler_triggers
+        ses_accesses          = v.ses_accesses
+        lambda_accesses       = v.lambda_accesses
       }
     }
   }
