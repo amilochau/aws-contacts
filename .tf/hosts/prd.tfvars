@@ -51,6 +51,16 @@ dynamodb_tables_settings = {
     ttl = {
       enabled = true
     }
+    attributes = {
+      "st" = {
+        type = "N"
+      }
+    }
+    attributes = {
+      "cd" = {
+        type = "N"
+      }
+    }
     global_secondary_indexes = {
       "by_st_thenby_cd" = {
         partition_key = "st"
