@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Milochau.Core.Aws.Integration;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 

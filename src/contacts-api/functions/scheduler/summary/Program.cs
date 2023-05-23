@@ -11,7 +11,6 @@ using Amazon.Lambda;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.RuntimeSupport;
 using Amazon.Lambda.Serialization.SystemTextJson;
-using Amazon.Runtime.Internal;
 using Milochau.Contacts.Scheduler.Summary.DataAccess;
 
 [assembly: LambdaSerializer(typeof(DefaultLambdaJsonSerializer))]
@@ -65,10 +64,7 @@ namespace Milochau.Contacts.Scheduler.Summary
 
             await emailsLambdaDataAccess.SendSummaryAsync(new EmailRequest
             {
-                Tos = new List<EmailRequestRecipient>
-                {
-                    new EmailRequestRecipient { Address = "" },
-                },
+                Tos = summaryContactUsers,
                 RawTemplateData = JsonSerializer.Serialize(new EmailRequestContent
                 {
                     Messages = summaryMessages,
