@@ -37,7 +37,8 @@ lambda_settings = {
     "scheduler/summary" = {
       scheduler_triggers = [{
         description         = "Send a summary of pending contacts every day"
-        schedule_expression = "rate(2 minutes)"
+        schedule_expression = "rate(1 days)"
+        enabled             = false
       }]
       lambda_accesses = [{
         arn = "arn:aws:lambda:eu-west-3:266302224431:function:emails-dev-fn-async-send-emails"
