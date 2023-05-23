@@ -1,4 +1,5 @@
 ﻿using Amazon.DynamoDBv2;
+using Amazon.Lambda;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.TestUtilities;
 using Microsoft.AspNetCore.Builder;
@@ -19,7 +20,8 @@ namespace Milochau.Contacts.Tests.Integration.Apis
             {
                 var proxyRequest = await ApiGatewayHelpers.BuildProxyRequestAsync(httpContext, new ProxyRequestOptions(), cancellationToken);
                 var dynamoDbDataAccess = new Scheduler.Summary.DataAccess.DynamoDbDataAccess(new AmazonDynamoDBClient());
-                await Scheduler.Summary.Function.DoAsync(new MemoryStream(), new TestLambdaContext(), dynamoDbDataAccess, cancellationToken);
+                var emailsLambdaDataAccess = new Scheduler.Summary.DataAccess.EmailsLambdaDataAccess(new AmazonLambdaClient());
+                await Scheduler.Summary.Function.DoAsync(new MemoryStream(), new TestLambdaContext(), dynamoDbDataAccess, emailsLambdaDataAccess, cancellationToken);
                 return ApiGatewayHelpers.BuildEmptyResult(new APIGatewayHttpApiV2ProxyResponse
                 {
                     StatusCode = 204,

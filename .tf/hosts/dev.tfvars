@@ -53,8 +53,6 @@ dynamodb_tables_settings = {
       "st" = {
         type = "N"
       }
-    }
-    attributes = {
       "cd" = {
         type = "N"
       }
