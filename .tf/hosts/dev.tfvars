@@ -13,7 +13,6 @@ lambda_settings = {
   base_directory = "../src/contacts-api/functions"
   functions = {
     "http/messages/post" = {
-      memory_size_mb = 256
       http_triggers = [{
         method    = "POST"
         route     = "/api/messages"
@@ -25,7 +24,6 @@ lambda_settings = {
       }]
     }
     "http/messages/get" = {
-      memory_size_mb = 256
       http_triggers = [{
         method    = "GET"
         route     = "/api/messages/{messageId}"
@@ -34,6 +32,16 @@ lambda_settings = {
         method    = "GET"
         route     = "/api/a/messages/{messageId}"
         anonymous = true
+      }]
+    }
+    "scheduler/summary" = {
+      scheduler_triggers = [{
+        description         = "Send a summary of pending contacts every day"
+        schedule_expression = "rate(1 days)"
+        enabled             = false
+      }]
+      lambda_accesses = [{
+        arn = "arn:aws:lambda:eu-west-3:266302224431:function:emails-dev-fn-async-send-emails"
       }]
     }
   }
@@ -45,6 +53,29 @@ dynamodb_tables_settings = {
     ttl = {
       enabled = true
     }
+    attributes = {
+      "st" = {
+        type = "N"
+      }
+      "cd" = {
+        type = "N"
+      }
+    }
+    global_secondary_indexes = {
+      "by_st_thenby_cd" = {
+        partition_key = "st"
+        sort_key      = "cd"
+        non_key_attributes = [
+          "id",
+          "user_id",
+          "co"
+        ]
+      }
+    }
+  }
+  "contactusers" = {
+    partition_key = "type"
+    sort_key      = "id"
   }
 }
 

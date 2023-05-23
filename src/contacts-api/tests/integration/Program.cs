@@ -36,6 +36,7 @@ namespace Milochau.Contacts.Tests.Integration
             }).ExcludeFromDescription();
 
             app.MapMessagesApis();
+            app.MapSummaryApis();
 
             app.Run();
         }

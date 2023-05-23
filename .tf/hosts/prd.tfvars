@@ -36,6 +36,15 @@ lambda_settings = {
         anonymous = true
       }]
     }
+    "scheduler/summary" = {
+      scheduler_triggers = [{
+        description         = "Send a summary of pending contacts every day"
+        schedule_expression = "rate(1 days)"
+      }]
+      lambda_accesses = [{
+        arn = "arn:aws:lambda:eu-west-3:266302224431:function:emails-prd-fn-async-send-emails"
+      }]
+    }
   }
 }
 
@@ -45,6 +54,29 @@ dynamodb_tables_settings = {
     ttl = {
       enabled = true
     }
+    attributes = {
+      "st" = {
+        type = "N"
+      }
+      "cd" = {
+        type = "N"
+      }
+    }
+    global_secondary_indexes = {
+      "by_st_thenby_cd" = {
+        partition_key = "st"
+        sort_key      = "cd"
+        non_key_attributes = [
+          "id",
+          "user_id",
+          "co"
+        ]
+      }
+    }
+  }
+  "contactusers" = {
+    partition_key = "type"
+    sort_key      = "id"
   }
 }
 

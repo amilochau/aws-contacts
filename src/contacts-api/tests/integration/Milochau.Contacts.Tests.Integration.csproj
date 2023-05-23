@@ -11,14 +11,14 @@
 
   <ItemGroup>
     <PackageReference Include="Amazon.Lambda.TestUtilities" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
-    <PackageReference Include="Milochau.Core.Aws.Integration" Version="0.1.2-beta.14" />
+    <PackageReference Include="Milochau.Core.Aws.Integration" Version="0.1.2-beta.16" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\functions\http\messages\get\Milochau.Contacts.Http.Messages.Get.csproj" />
     <ProjectReference Include="..\..\functions\http\messages\post\Milochau.Contacts.Http.Messages.Post.csproj" />
+    <ProjectReference Include="..\..\functions\scheduler\summary\Milochau.Contacts.Scheduler.Summary.csproj" />
   </ItemGroup>
 
 </Project>

@@ -15,7 +15,7 @@ namespace Milochau.Contacts.Http.Messages.Get.DataAccess
         Task<FunctionResponse> GetMessageAsync(FunctionRequest request, CancellationToken cancellationToken);
     }
 
-    public class DynamoDbDataAccess : BaseDynamoDbDataAccess<BaseAccessResult>, IDynamoDbDataAccess
+    public class DynamoDbDataAccess : BaseDynamoDbDataAccess, IDynamoDbDataAccess
     {
         public DynamoDbDataAccess(IAmazonDynamoDB amazonDynamoDB) : base(amazonDynamoDB)
         {
