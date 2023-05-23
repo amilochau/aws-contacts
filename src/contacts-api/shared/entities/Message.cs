@@ -60,9 +60,9 @@ namespace Milochau.Contacts.Shared.Entities
             };
         }
 
-        public class Message__Gsi_By_Status_ThenBy_Id
+        public class Message__Gsi_By_Status_ThenBy_Creation
         {
-            public const string IndexName = "by_st_thenby_id";
+            public const string IndexName = "by_st_thenby_cd";
 
             public string Id { get; set; } = null!;
             public DateTimeOffset Creation { get; set; }
@@ -70,9 +70,9 @@ namespace Milochau.Contacts.Shared.Entities
             public MessageStatus Status { get; set; }
             public MessageContent Content { get; set; } = null!;
 
-            public static Message__Gsi_By_Status_ThenBy_Id ParseFromDynamoDb(Dictionary<string, AttributeValue?> attributes)
+            public static Message__Gsi_By_Status_ThenBy_Creation ParseFromDynamoDb(Dictionary<string, AttributeValue?> attributes)
             {
-                return new Message__Gsi_By_Status_ThenBy_Id
+                return new Message__Gsi_By_Status_ThenBy_Creation
                 {
                     Id = attributes.ReadString(K_Id),
                     Creation = attributes.ReadDateTimeOffset(K_Creation),

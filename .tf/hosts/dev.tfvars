@@ -49,25 +49,21 @@ dynamodb_tables_settings = {
     ttl = {
       enabled = true
     }
-    attributes = {
-      "st" = {
-        type = "N"
-      }
-    }
     global_secondary_indexes = {
-      "by_st_thenby_id" = {
+      "by_st_thenby_cd" = {
         partition_key = "st"
-        sort_key      = "id"
+        sort_key      = "cd"
         non_key_attributes = [
-          "cd",
+          "id",
           "user_id",
           "co"
         ]
       }
     }
   }
-  "admins" = {
-    partition_key = "id"
+  "contactusers" = {
+    partition_key = "type"
+    sort_key      = "id"
   }
 }
 

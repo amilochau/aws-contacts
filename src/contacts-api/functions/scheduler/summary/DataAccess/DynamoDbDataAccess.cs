@@ -13,7 +13,8 @@ namespace Milochau.Contacts.Scheduler.Summary.DataAccess
 {
     public interface IDynamoDbDataAccess
     {
-        Task<List<Message.Message__Gsi_By_Status_ThenBy_Id>> GetSummaryMessagesAsync(CancellationToken cancellationToken);
+        Task<List<EmailRequestContentMessage>> GetSummaryMessagesAsync(CancellationToken cancellationToken);
+        Task<List<EmailRequestRecipient>> GetSummaryRecipientsAsync(CancellationToken cancellationToken);
     }
 
     public class DynamoDbDataAccess : BaseDynamoDbDataAccess, IDynamoDbDataAccess
@@ -22,7 +23,7 @@ namespace Milochau.Contacts.Scheduler.Summary.DataAccess
         {
         }
 
-        public async Task<List<Message.Message__Gsi_By_Status_ThenBy_Id>> GetSummaryMessagesAsync(CancellationToken cancellationToken)
+        public async Task<List<EmailRequestContentMessage>> GetSummaryMessagesAsync(CancellationToken cancellationToken)
         {
             var newKeyConditionExpressionBuilder = new DynamoDbKeyConditionExpressionBuilder();
             newKeyConditionExpressionBuilder.Equal.Add(Message.K_Status);
@@ -30,7 +31,7 @@ namespace Milochau.Contacts.Scheduler.Summary.DataAccess
             var newDynamoDbResponseTask = amazonDynamoDB.QueryAsync(new QueryRequest
             {
                 TableName = $"{ConventionsPrefix}-table-{Message.TableNameSuffix}",
-                IndexName = Message.Message__Gsi_By_Status_ThenBy_Id.IndexName,
+                IndexName = Message.Message__Gsi_By_Status_ThenBy_Creation.IndexName,
                 KeyConditionExpression = newKeyConditionExpressionBuilder.Build(),
                 ExpressionAttributeNames = newKeyConditionExpressionBuilder.GetExpressionAttributeNames(),
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
@@ -45,7 +46,7 @@ namespace Milochau.Contacts.Scheduler.Summary.DataAccess
             var inProgressDynamoDbResponseTask = amazonDynamoDB.QueryAsync(new QueryRequest
             {
                 TableName = $"{ConventionsPrefix}-table-{Message.TableNameSuffix}",
-                IndexName = Message.Message__Gsi_By_Status_ThenBy_Id.IndexName,
+                IndexName = Message.Message__Gsi_By_Status_ThenBy_Creation.IndexName,
                 KeyConditionExpression = inProgressKeyConditionExpressionBuilder.Build(),
                 ExpressionAttributeNames = inProgressKeyConditionExpressionBuilder.GetExpressionAttributeNames(),
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
@@ -57,12 +58,42 @@ namespace Milochau.Contacts.Scheduler.Summary.DataAccess
             var newDynamoDbResponse = await newDynamoDbResponseTask;
             var inProgressDynamoDbResponse = await inProgressDynamoDbResponseTask;
 
-            return newDynamoDbResponse.Items.Take(Message.MaxFetchItems).Select(Message.Message__Gsi_By_Status_ThenBy_Id.ParseFromDynamoDb)
-                .Concat(inProgressDynamoDbResponse.Items.Take(Message.MaxFetchItems).Select(Message.Message__Gsi_By_Status_ThenBy_Id.ParseFromDynamoDb))
+            return newDynamoDbResponse.Items.Take(Message.MaxFetchItems).Select(Message.Message__Gsi_By_Status_ThenBy_Creation.ParseFromDynamoDb)
+                .Concat(inProgressDynamoDbResponse.Items.Take(Message.MaxFetchItems).Select(Message.Message__Gsi_By_Status_ThenBy_Creation.ParseFromDynamoDb))
+                .Select(x => new EmailRequestContentMessage
+                {
+                    Id = x.Id,
+                    Status = x.Status.ToString(),
+                    Message = x.Content.Message,
+                    SenderEmail = x.Content.SenderEmail,
+                    SenderName = x.Content.SenderName,
+                })
                 .ToList();
         }
 
-        private async Task<IEnumerable<Message.Message__Gsi_By_Status_ThenBy_Id>> GetMessagesAsync(MessageStatus status, CancellationToken cancellationToken)
+        public async Task<List<EmailRequestRecipient>> GetSummaryRecipientsAsync(CancellationToken cancellationToken)
+        {
+            var keyConditionExpressionBuilder = new DynamoDbKeyConditionExpressionBuilder();
+            keyConditionExpressionBuilder.Equal.Add(ContactUser.K_ContactUserType);
+
+            var dynamoDbResponse = await amazonDynamoDB.QueryAsync(new QueryRequest
+            {
+                TableName = $"{ConventionsPrefix}-table-{ContactUser.TableNameSuffix}",
+                KeyConditionExpression = keyConditionExpressionBuilder.Build(),
+                ExpressionAttributeNames = keyConditionExpressionBuilder.GetExpressionAttributeNames(),
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+                    .AppendValue(ContactUser.K_ContactUserType, ContactUserType.Summary)
+                    .ToDictionary(x => x.Key, x => x.Value),
+                Limit = ContactUser.MaxFetchItems,
+            }, cancellationToken);
+
+            return dynamoDbResponse.Items.Take(ContactUser.MaxFetchItems).Select(ContactUser.ParseFromDynamoDb).Select(x => new EmailRequestRecipient
+            {
+                Address = x.EmailAddress,
+            }).ToList();
+        }
+
+        private async Task<IEnumerable<Message.Message__Gsi_By_Status_ThenBy_Creation>> GetMessagesAsync(MessageStatus status, CancellationToken cancellationToken)
         {
             var keyConditionExpressionBuilder = new DynamoDbKeyConditionExpressionBuilder();
             keyConditionExpressionBuilder.Equal.Add(Message.K_Status);
@@ -70,7 +101,7 @@ namespace Milochau.Contacts.Scheduler.Summary.DataAccess
             var dynamoDbResponse = await amazonDynamoDB.QueryAsync(new QueryRequest
             {
                 TableName = $"{ConventionsPrefix}-table-{Message.TableNameSuffix}",
-                IndexName = Message.Message__Gsi_By_Status_ThenBy_Id.IndexName,
+                IndexName = Message.Message__Gsi_By_Status_ThenBy_Creation.IndexName,
                 KeyConditionExpression = keyConditionExpressionBuilder.Build(),
                 ExpressionAttributeNames = keyConditionExpressionBuilder.GetExpressionAttributeNames(),
                 ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
@@ -79,7 +110,7 @@ namespace Milochau.Contacts.Scheduler.Summary.DataAccess
                 Limit = Message.MaxFetchItems,
             }, cancellationToken);
 
-            return dynamoDbResponse.Items.Take(Message.MaxFetchItems).Select(Message.Message__Gsi_By_Status_ThenBy_Id.ParseFromDynamoDb);
+            return dynamoDbResponse.Items.Take(Message.MaxFetchItems).Select(Message.Message__Gsi_By_Status_ThenBy_Creation.ParseFromDynamoDb);
         }
     }
 }

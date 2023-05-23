@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -55,21 +56,30 @@ namespace Milochau.Contacts.Scheduler.Summary
                 return;
             }
 
+            var summaryContactUsers = await dynamoDbDataAccess.GetSummaryRecipientsAsync(cancellationToken);
+            if (!summaryContactUsers.Any())
+            {
+                // No summary contact users, so no need to send summary
+                return;
+            }
+
             await emailsLambdaDataAccess.SendSummaryAsync(new EmailRequest
             {
                 Tos = new List<EmailRequestRecipient>
                 {
                     new EmailRequestRecipient { Address = "" },
                 },
-                TemplateData = new Dictionary<string, string>
+                RawTemplateData = JsonSerializer.Serialize(new EmailRequestContent
                 {
-                },
+                    Messages = summaryMessages,
+                }, ApplicationJsonSerializerContext.Default.EmailRequestContent),
             }, cancellationToken);
         }
     }
 
     [JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonSerializable(typeof(EmailRequest))]
+    [JsonSerializable(typeof(EmailRequestContent))]
     public partial class ApplicationJsonSerializerContext : JsonSerializerContext
     {
     }
