@@ -12,6 +12,7 @@ cognito_clients_settings = {
 lambda_settings = {
   base_directory = "../src/contacts-api/functions"
   functions = {
+    "async/unsubscribe-emails" = {}
     "http/messages/post" = {
       http_triggers = [{
         method    = "POST"

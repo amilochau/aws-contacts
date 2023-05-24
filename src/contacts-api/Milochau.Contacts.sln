@@ -32,6 +32,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scheduler", "scheduler", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Milochau.Contacts.Scheduler.Summary", "functions\scheduler\summary\Milochau.Contacts.Scheduler.Summary.csproj", "{9826E6B9-5B72-4129-B309-DC6F6496119C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "async", "async", "{08E1B2A8-8211-4BDC-9AFF-ACF2B53364D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Milochau.Contacts.Async.UnsubscribeEmails", "functions\async\unsubscribe-emails\Milochau.Contacts.Async.UnsubscribeEmails.csproj", "{AA3B7258-6CAC-4F7C-81EE-5E371FA2AD8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +66,10 @@ Global
 		{9826E6B9-5B72-4129-B309-DC6F6496119C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9826E6B9-5B72-4129-B309-DC6F6496119C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9826E6B9-5B72-4129-B309-DC6F6496119C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA3B7258-6CAC-4F7C-81EE-5E371FA2AD8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3B7258-6CAC-4F7C-81EE-5E371FA2AD8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3B7258-6CAC-4F7C-81EE-5E371FA2AD8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3B7258-6CAC-4F7C-81EE-5E371FA2AD8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +84,8 @@ Global
 		{2A432954-F1E1-49C0-A1E3-414B341B2A6E} = {05A2ADF7-166C-4F82-A29A-7E2D4C6F56B4}
 		{06461C62-2303-4550-98D7-D35A6AC336D4} = {4A61FEB0-930F-426C-BF8E-AC328FD0570D}
 		{9826E6B9-5B72-4129-B309-DC6F6496119C} = {06461C62-2303-4550-98D7-D35A6AC336D4}
+		{08E1B2A8-8211-4BDC-9AFF-ACF2B53364D2} = {4A61FEB0-930F-426C-BF8E-AC328FD0570D}
+		{AA3B7258-6CAC-4F7C-81EE-5E371FA2AD8D} = {08E1B2A8-8211-4BDC-9AFF-ACF2B53364D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C48C3CE6-9541-4497-B2EE-589791207E39}

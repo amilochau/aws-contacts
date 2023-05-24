@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Milochau.Contacts.Shared.Entities.Types;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Milochau.Contacts.Scheduler.Summary.DataAccess
 {
     public class EmailRequest
     {
-        public List<EmailRequestRecipient> Tos { get; set; } = new List<EmailRequestRecipient>();
         public string TemplateId { get; } = "contacts-summary";
+        public EmailSourceType SourceType { get; } = EmailSourceType.ContactsSummary;
+
+        public List<EmailRequestRecipient> Tos { get; set; } = new List<EmailRequestRecipient>();
         public string? RawTemplateData { get; set; }
     }
 
