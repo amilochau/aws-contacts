@@ -89,7 +89,7 @@ namespace Milochau.Contacts.Scheduler.Summary.DataAccess
 
             return dynamoDbResponse.Items.Take(ContactUser.MaxFetchItems).Select(ContactUser.ParseFromDynamoDb).Select(x => new EmailRequestRecipient
             {
-                Address = x.EmailAddress,
+                EmailAddress = x.EmailAddress,
             }).ToList();
         }
 

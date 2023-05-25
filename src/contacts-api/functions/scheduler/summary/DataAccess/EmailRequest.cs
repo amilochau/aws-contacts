@@ -15,13 +15,13 @@ namespace Milochau.Contacts.Scheduler.Summary.DataAccess
 
     public class EmailRequestRecipient
     {
-        public string Address { get; set; } = null!;
+        public string EmailAddress { get; set; } = null!;
     }
 
     public class EmailRequestContent
     {
         [JsonPropertyName("unsubscribe_url")]
-        public string UnsubscribeUrl { get; set; } = "https://";
+        public string UnsubscribeUrl { get; set; } = "__UNSUBSCRIBE_URL__";
 
         [JsonPropertyName("messages")]
         public List<EmailRequestContentMessage> Messages { get; set; } = new List<EmailRequestContentMessage>();
