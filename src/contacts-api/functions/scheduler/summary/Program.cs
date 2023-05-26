@@ -61,14 +61,13 @@ namespace Milochau.Contacts.Scheduler.Summary
                 return;
             }
 
-            await emailsLambdaDataAccess.SendSummaryAsync(new EmailRequest
-            {
-                Tos = summaryContactUsers,
-                RawTemplateData = JsonSerializer.Serialize(new EmailRequestContent
+            await emailsLambdaDataAccess.SendSummaryAsync(new EmailRequest(
+                tos: summaryContactUsers,
+                rawTemplateData: JsonSerializer.Serialize(new EmailRequestContent
                 {
                     Messages = summaryMessages,
-                }, ApplicationJsonSerializerContext.Default.EmailRequestContent),
-            }, cancellationToken);
+                }, ApplicationJsonSerializerContext.Default.EmailRequestContent)
+            ), cancellationToken);
         }
     }
 

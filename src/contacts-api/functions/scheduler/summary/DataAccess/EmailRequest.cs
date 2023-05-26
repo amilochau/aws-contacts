@@ -1,4 +1,4 @@
-﻿using Milochau.Contacts.Shared.Entities.Types;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -6,22 +6,32 @@ namespace Milochau.Contacts.Scheduler.Summary.DataAccess
 {
     public class EmailRequest
     {
-        public string TemplateId { get; } = "contacts-summary";
-        public EmailSourceType SourceType { get; } = EmailSourceType.ContactsSummary;
+        public string TemplateId { get; }
+        public string? UnsubscribeFunctionName { get; }
 
-        public List<EmailRequestRecipient> Tos { get; set; } = new List<EmailRequestRecipient>();
-        public string? RawTemplateData { get; set; }
+        public List<EmailRequestRecipient> Tos { get; set; }
+        public string RawTemplateData { get; set; }
+
+        public EmailRequest(List<EmailRequestRecipient> tos, string rawTemplateData)
+        {
+            var conventionsHost = Environment.GetEnvironmentVariable("CONVENTION__HOST")!;
+        
+            TemplateId = "contacts-summary";
+            UnsubscribeFunctionName = $"contacts-{conventionsHost}-fn-async-unsubscribe-emails";
+            Tos = tos;
+            RawTemplateData = rawTemplateData;
+        }
     }
 
     public class EmailRequestRecipient
     {
-        public string Address { get; set; } = null!;
+        public string EmailAddress { get; set; } = null!;
     }
 
     public class EmailRequestContent
     {
         [JsonPropertyName("unsubscribe_url")]
-        public string UnsubscribeUrl { get; set; } = "https://";
+        public string UnsubscribeUrl { get; set; } = "__UNSUBSCRIBE_URL__";
 
         [JsonPropertyName("messages")]
         public List<EmailRequestContentMessage> Messages { get; set; } = new List<EmailRequestContentMessage>();
