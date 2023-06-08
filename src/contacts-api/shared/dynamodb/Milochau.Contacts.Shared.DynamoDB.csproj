@@ -11,8 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Milochau.Core.Aws.Abstractions" Version="0.1.2-beta.16" />
-    <PackageReference Include="Milochau.Core.Aws.DynamoDB" Version="0.1.2-beta.16" />
+    <PackageReference Include="Milochau.Core.Aws.Abstractions" Version="0.1.2-beta.17" />
+    <PackageReference Include="Milochau.Core.Aws.DynamoDB" Version="0.1.2-beta.17" />
   </ItemGroup>
 
   <ItemGroup>
