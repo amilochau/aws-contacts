@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Amazon.Lambda.TestUtilities" Version="2.0.0" />
-    <PackageReference Include="Milochau.Core.Aws.Integration" Version="0.1.2-beta.16" />
+    <PackageReference Include="Milochau.Core.Aws.Integration" Version="0.1.2-beta.17" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
