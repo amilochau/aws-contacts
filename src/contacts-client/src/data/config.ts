@@ -2,6 +2,7 @@ import type { MilochauCoreOptions } from "@amilochau/core-vue3"
 import { getConfig, getCurrentEnvironment } from "../utils/config"
 import routes from "./routes"
 import navigationItems from "./navigation"
+import logoUrl from "@/assets/logo.png"
 
 export enum Environment {
   Default = 'default',
@@ -50,6 +51,7 @@ export const coreOptions: MilochauCoreOptions = {
   application: {
     name: 'Contacts',
     contact: 'Antoine Milochau',
+    logoUrl,
     navigation: {
       items: navigationItems,
     },

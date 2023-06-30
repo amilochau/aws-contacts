@@ -1,5 +1,6 @@
 import type { MessagesCreateRequest, MessagesDetailsResponse } from "@/types/messages";
-import { useApi, type IDefaultCreateResponse } from "@amilochau/core-vue3";
+import { type IDefaultCreateResponse } from "@amilochau/core-vue3";
+import { useApi } from "@amilochau/core-vue3-auth";
 
 export function useMessagesApi() {
 

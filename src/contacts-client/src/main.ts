@@ -1,8 +1,7 @@
-import { createApp } from 'vue'
 import App from './App.vue'
-import milochauCore from './plugins/milochau-core'
+import { CoreVue3Auth } from '@amilochau/core-vue3-auth'
+import { coreOptions } from './data/config'
 
 import 'vuetify/styles'
 
-const app = createApp(App);
-app.use(milochauCore);
+export const createApp = CoreVue3Auth(App, coreOptions);

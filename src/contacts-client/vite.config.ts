@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
-import { VitePluginFonts } from 'vite-plugin-fonts'
+import Unfonts from 'unplugin-fonts/vite'
 import { setDefaultResultOrder } from 'dns'
 
 setDefaultResultOrder('verbatim')
@@ -17,7 +17,7 @@ export default defineConfig({
       compositionOnly: true,
       runtimeOnly: false,
     }),
-    VitePluginFonts({
+    Unfonts({
       google: {
         families: [{
           name: 'Roboto',
@@ -28,14 +28,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: [
-      {
-        find: '@',
-        replacement: fileURLToPath(new URL('./src', import.meta.url))
-      },
-      {
-        find: './runtimeConfig',
-        replacement: './runtimeConfig.browser',
-      }
+      { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
+      { find: /^pinia$/, replacement: 'pinia/dist/pinia.mjs' },
     ]
   },
   optimizeDeps: {
