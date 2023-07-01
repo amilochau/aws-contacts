@@ -4,7 +4,7 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md">
+  <a href="https://github.com/amilochau/aws-contacts/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/amilochau/aws-contacts" alt="License">
   </a>
 </p>
@@ -42,7 +42,7 @@ The following files have to be adapted.
 
 - Front-End (UI client): `vue.js v3`, `vuetify`
 - Back-End (Functions): `.NET 7.0 native AOT`
-- Infrastructure: `AWS CloudFront`, `AWS Lambda`, `AWS S3`, `AWS DynamoDB`
+- Infrastructure: `AWS CloudFront`, `AWS Lambda`, `AWS S3`, `AWS DynamoDB`, `AWS Cognito`
 - DevOps: `GitHub Actions`, `Terraform`
 
 The following `amilochau` packages are used:
