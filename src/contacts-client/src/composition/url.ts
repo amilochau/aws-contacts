@@ -2,7 +2,7 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { authorizedDomains } from '../data/config';
 
-export function useUrl() {
+export const useUrl = () => {
 
   const route = useRoute()
 

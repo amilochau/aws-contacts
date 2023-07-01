@@ -3,7 +3,7 @@ import { MessageStatus, MessageTrackingType } from "@/types/messages"
 import { useI18n } from 'vue-i18n'
 import type { FormattedData } from "@amilochau/core-vue3"
 
-export function useFormat() {
+export const useFormat = () => {
   const { t, mergeLocaleMessage } = useI18n()
 
   mergeLocaleMessage('en', {

@@ -1,7 +1,7 @@
 import type { MessagesCreateRequest, MessagesDetailsResponse } from "@/types/messages";
 import { useApiAnonymous, type IDefaultCreateResponse } from "@amilochau/core-vue3";
 
-export function useMessagesAnonymousApi() {
+export const useMessagesAnonymousApi = () => {
 
   const api = useApiAnonymous('/a/messages')
 

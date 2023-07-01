@@ -2,7 +2,7 @@ import type { MessagesCreateRequest, MessagesDetailsResponse } from "@/types/mes
 import { type IDefaultCreateResponse } from "@amilochau/core-vue3";
 import { useApi } from "@amilochau/core-vue3-auth";
 
-export function useMessagesApi() {
+export const useMessagesApi = () => {
 
   const api = useApi('/messages')
 
