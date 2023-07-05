@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{9B539D0C-6E3E-49A5-A254-A3F000563186}"
-	ProjectSection(SolutionItems) = preProject
-		functions\rd.xml = functions\rd.xml
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{1AC46DFE-0602-4EFC-B6C6-290FA6FDEAB6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "functions", "functions", "{4A61FEB0-930F-426C-BF8E-AC328FD0570D}"
