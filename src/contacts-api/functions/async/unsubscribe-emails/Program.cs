@@ -9,6 +9,7 @@ using Amazon.Lambda.Serialization.SystemTextJson;
 using Milochau.Contacts.Async.UnsubscribeEmails.DataAccess;
 using System.Collections.Generic;
 using System.Linq;
+using Amazon.XRay.Recorder.Handlers.AwsSdk;
 
 [assembly: LambdaSerializer(typeof(DefaultLambdaJsonSerializer))]
 namespace Milochau.Contacts.Async.UnsubscribeEmails
@@ -17,6 +18,8 @@ namespace Milochau.Contacts.Async.UnsubscribeEmails
     {
         private static async Task Main()
         {
+            AWSSDKHandler.RegisterXRayForAllServices();
+
             Func<FunctionRequest, ILambdaContext, Task> handler = FunctionHandler;
             await LambdaBootstrapBuilder.Create(handler, new SourceGeneratorLambdaJsonSerializer<ApplicationJsonSerializerContext>())
                 .Build()

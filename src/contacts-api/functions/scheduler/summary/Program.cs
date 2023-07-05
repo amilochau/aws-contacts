@@ -10,6 +10,7 @@ using Amazon.Lambda;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.RuntimeSupport;
 using Amazon.Lambda.Serialization.SystemTextJson;
+using Amazon.XRay.Recorder.Handlers.AwsSdk;
 using Milochau.Contacts.Scheduler.Summary.DataAccess;
 
 [assembly: LambdaSerializer(typeof(DefaultLambdaJsonSerializer))]
@@ -19,6 +20,8 @@ namespace Milochau.Contacts.Scheduler.Summary
     {
         private static async Task Main()
         {
+            AWSSDKHandler.RegisterXRayForAllServices();
+
             Func<Stream, ILambdaContext, Task> handler = FunctionHandler;
             await LambdaBootstrapBuilder.Create(handler)
                 .Build()
