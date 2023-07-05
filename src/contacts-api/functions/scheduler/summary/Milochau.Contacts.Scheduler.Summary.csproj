@@ -44,7 +44,7 @@
     <TrimmerRootAssembly Include="AWSSDK.Core" />
     <TrimmerRootAssembly Include="AWSXRayRecorder.Core" />
     <TrimmerRootAssembly Include="AWSXRayRecorder.Handlers.AwsSdk" />
-    <RdXmlFile Include="../../rd.xml" />
+    <TrimmerRootAssembly Include="bootstrap" />
   </ItemGroup>
 
 </Project>
