@@ -14,7 +14,6 @@ lambda_settings = {
   functions = {
     "async/unsubscribe-emails" = {}
     "http/messages/post" = {
-      memory_size_mb = 256
       http_triggers = [{
         method    = "POST"
         route     = "/api/messages"
@@ -26,7 +25,6 @@ lambda_settings = {
       }]
     }
     "http/messages/get" = {
-      memory_size_mb = 256
       http_triggers = [{
         method    = "GET"
         route     = "/api/messages/{messageId}"
