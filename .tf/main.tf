@@ -51,7 +51,7 @@ module "checks" {
 }
 
 module "functions_app" {
-  source      = "git::https://github.com/amilochau/tf-modules.git//aws/functions-app?ref=v1"
+  source      = "git::https://github.com/amilochau/tf-modules.git//aws/functions-app?ref=amilochau/enable-x-ray-tracing"
   conventions = var.conventions
 
   cognito_clients_settings = var.cognito_clients_settings

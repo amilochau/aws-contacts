@@ -9,6 +9,7 @@ using Amazon.Lambda.RuntimeSupport;
 using Amazon.Lambda.Serialization.SystemTextJson;
 using Milochau.Core.Aws.ApiGateway;
 using Milochau.Contacts.Http.Messages.Get.DataAccess;
+using Amazon.XRay.Recorder.Handlers.AwsSdk;
 
 [assembly: LambdaSerializer(typeof(DefaultLambdaJsonSerializer))]
 namespace Milochau.Contacts.Http.Messages.Get
@@ -17,6 +18,8 @@ namespace Milochau.Contacts.Http.Messages.Get
     {
         private static async Task Main()
         {
+            AWSSDKHandler.RegisterXRayForAllServices();
+
             Func<APIGatewayHttpApiV2ProxyRequest, ILambdaContext, Task<APIGatewayHttpApiV2ProxyResponse>> handler = FunctionHandler;
             await LambdaBootstrapBuilder.Create(handler, new SourceGeneratorLambdaJsonSerializer<ApplicationJsonSerializerContext>())
                 .Build()
